@@ -1,0 +1,24 @@
+name: homie-fronius
+
+x-logging: &default-logging
+  driver: local
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-extra-hosts: &default-extra-hosts
+  - "host.docker.internal:host-gateway"
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    logging: *default-logging
+    extra_hosts: *default-extra-hosts
+    restart: unless-stopped
+    environment:
+      HOMIE_URL: ${HOMIE_URL}
+      FRONIUS_URL: ${FRONIUS_URL}
+      LOG_LEVEL: ${LOG_LEVEL}
+      POLLING_INTERVAL: ${POLLING_INTERVAL}
