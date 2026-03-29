@@ -44,7 +44,7 @@ class FroniusGateway extends HomieRootDevice {
 
     const info: DeviceInfo = {
       name: 'Fronius Gateway',
-      type: 'gateway',
+      type: 'blorgh',
       homie: '5.0',
       version: 1,
     };
@@ -56,42 +56,42 @@ class FroniusGateway extends HomieRootDevice {
       type: 'powerflow',
     });
 
-    this.p_akku_imp = this.powerflow.addFloatProperty('P_Akku_Import', {
+    this.p_akku_imp = this.powerflow.addFloatProperty('p-akku-import', {
       name: 'Power - Accumulator - Import',
       unit: 'W',
       settable: false,
       retained: true,
     }, 0);
 
-    this.p_akku_exp = this.powerflow.addFloatProperty('P_Akku_Export', {
+    this.p_akku_exp = this.powerflow.addFloatProperty('p-akku-export', {
       name: 'Power - Accumulator - Export',
       unit: 'W',
       settable: false,
       retained: true,
     }, 0);
 
-    this.p_grid_imp = this.powerflow.addFloatProperty('P_Grid_Import', {
+    this.p_grid_imp = this.powerflow.addFloatProperty('p-grid-import', {
       name: 'Power - Grid - Import',
       unit: 'W',
       settable: false,
       retained: true,
     }, 0);
 
-    this.p_grid_exp = this.powerflow.addFloatProperty('P_Grid_Export', {
+    this.p_grid_exp = this.powerflow.addFloatProperty('p-grid-export', {
       name: 'Power - Grid - Export',
       unit: 'W',
       settable: false,
       retained: true,
     }, 0);
 
-    this.p_load = this.powerflow.addFloatProperty('P_Load', {
+    this.p_load = this.powerflow.addFloatProperty('p-load', {
       name: 'Power - Load',
       unit: 'W',
       settable: false,
       retained: true,
     }, 0);
 
-    this.p_pv = this.powerflow.addFloatProperty('P_PV', {
+    this.p_pv = this.powerflow.addFloatProperty('p-pv', {
       name: 'Power - PV',
       unit: 'W',
       settable: false,
@@ -113,6 +113,8 @@ const control_loop = new LoopyLoop(async () => {
       for (const device of devices) {
         if (device.id) {
           gateway = new FroniusGateway(`fronius-${device.id}`, opts);
+          logger.info('Gateway initialized');
+          await wait(config.polling_interval * 1000);
           await gateway.ready();
           break;
         }
@@ -127,6 +129,8 @@ const control_loop = new LoopyLoop(async () => {
     if (!powerflow || !powerflow.site) {
       return await wait(60_000);
     }
+
+    logger.info('Powerflow retrieved');
 
     const { site } = powerflow;
 
@@ -157,6 +161,7 @@ const control_loop = new LoopyLoop(async () => {
     }
 
     await Promise.all(promises);
+    logger.info('DONE');
 
   }
 
