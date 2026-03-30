@@ -16,12 +16,12 @@
   "homepage": "https://github.com/grovekit/homie-fronius",
   "devDependencies": {
     "@deepkit/type-compiler": "^1.0.19",
-    "@types/node": "^24.7.2",
-    "typescript": "^5.9.3"
+    "@types/node": "^25.5.0",
+    "typescript": "^6.0.2"
   },
   "dependencies": {
     "@deepkit/type": "^1.0.19",
-    "@grovekit/homie-client": "^0.0.1-alpha.5",
+    "@grovekit/homie-client": "^0.0.1-alpha.7",
     "@grovekit/homie-core": "^0.0.1-alpha.4",
     "loopyloop": "^4.0.2",
     "pinetto": "^4.0.0"

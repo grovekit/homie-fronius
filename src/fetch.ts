@@ -17,7 +17,7 @@ const froniusFetch = async <T>(url: URL, __type_T?: ReceiveType<T>): Promise<T> 
     if (err instanceof ValidationError) {
       throw new Error('Invalid payload from Fronius API: ' + validationErrorToString(err));
     }
-    throw new Error('Unexpected error from Fronius API: ' + errToString(err, true));
+    throw new Error('Unexpected error while making request to the Fronius API: ' + errToString(err));
   }
 };
 
