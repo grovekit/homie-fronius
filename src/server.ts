@@ -35,7 +35,7 @@ const devices = await fetchDevices(config.fronius_url);
 if (devices) {
   for (const device of devices) {
     if (device.id) {
-      gateway = new FroniusGateway(`fronius-${device.id}`, opts);
+      gateway = new FroniusGateway(device.id, opts);
       await gateway.ready();
       logger.info('found device with ID %s, gateway initialized', device.id);
       break;

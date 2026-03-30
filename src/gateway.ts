@@ -25,14 +25,14 @@ export class FroniusGateway extends RootDevice {
   readonly #load_power_con: FloatProperty;
   readonly #pv_power_prd: FloatProperty;
 
-  constructor(id: string, opts: ClientOpts) {
+  constructor(fronius_id: string, opts: ClientOpts) {
 
     const info: DeviceInfo = {
-      name: 'Fronius',
+      name: `Fronius ${fronius_id}`,
       version: 1,
     };
 
-    super(id, info, opts);
+    super(`fronius-${fronius_id}`, info, opts);
 
     this.#accumulator = this.addNode('accumulator', {
       name: 'Accumulator',
