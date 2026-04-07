@@ -6,6 +6,8 @@ import assert from "node:assert";
 export interface Env {
   /** URL of Homie MQTT broker */
   HOMIE_URL: string;
+  /** Homie MQTT prefix */
+  HOMIE_PREFIX?: string;
   /** URL of Fronius API */
   FRONIUS_URL: string;
   /** Log level */
@@ -29,6 +31,8 @@ export const getEnv = (): Env => {
 export interface Config {
   /** URL of Homie MQTT broker */
   homie_url: URL;
+  /** Homie MQTT prefix */
+  homie_prefix: string;
   /** URL of Fronius API */
   fronius_url: URL;
   /** Log level */
@@ -41,6 +45,7 @@ export const getConfigFromEnv = (): Config => {
   const env = getEnv();
   const config: Config = {
     homie_url: new URL(env.HOMIE_URL),
+    homie_prefix: env.HOMIE_PREFIX || 'homie',
     fronius_url: new URL(env.FRONIUS_URL),
     log_level: env.LOG_LEVEL || 'info',
     polling_interval: Math.max(env.POLLING_INTERVAL ?? 10, 1),

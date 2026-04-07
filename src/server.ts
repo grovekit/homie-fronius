@@ -1,10 +1,4 @@
 
-import {
-  RootDevice,
-  type Node,
-  type DeviceInfo,
-  type FloatProperty,
-} from '@grovekit/homie-client';
 import { wait, errToString } from './utils.js';
 import { LoopyLoop } from 'loopyloop';
 import pinetto from 'pinetto';
@@ -35,7 +29,7 @@ const devices = await fetchDevices(config.fronius_url);
 if (devices) {
   for (const device of devices) {
     if (device.id) {
-      gateway = new FroniusGateway(device.id, opts);
+      gateway = new FroniusGateway(device.id, config.homie_prefix, opts);
       await gateway.ready();
       logger.info('found device with ID %s, gateway initialized', device.id);
       break;
