@@ -19,6 +19,7 @@ services:
     restart: unless-stopped
     environment:
       HOMIE_URL: ${HOMIE_URL}
+      HOMIE_PREFIX: ${HOMIE_PREFIX}
       FRONIUS_URL: ${FRONIUS_URL}
       LOG_LEVEL: ${LOG_LEVEL}
       POLLING_INTERVAL: ${POLLING_INTERVAL}

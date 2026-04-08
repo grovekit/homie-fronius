@@ -16,7 +16,8 @@ Configuration is provided through environment variables.
 | Variable           | Required | Default | Description                                          |
 | ------------------ | -------- | ------- | ---------------------------------------------------- |
 | `HOMIE_URL`        | Yes      | —       | MQTT broker URL (must use the `mqtt://` scheme)      |
-| `FRONIUS_URL`      | Yes      | —       | Base URL of the Fronius local API (`http://` scheme)  |
+| `HOMIE_PREFIX`     | No       | `homie` | Homie MQTT prefix                                    |
+| `FRONIUS_URL`      | Yes      | —       | Base URL of the Fronius local API (`http://` scheme) |
 | `LOG_LEVEL`        | No       | `info`  | Log level: `trace`, `debug`, `info`, `warn`, `error` |
 | `POLLING_INTERVAL` | No       | `10`    | Polling interval in seconds (minimum `1`)            |
 
@@ -24,6 +25,7 @@ Configuration is provided through environment variables.
 
 ```env
 HOMIE_URL=mqtt://localhost:1883
+HOMIE_PREFIX=homie
 FRONIUS_URL=http://192.168.1.42
 LOG_LEVEL=info
 POLLING_INTERVAL=10
