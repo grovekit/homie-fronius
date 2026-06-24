@@ -1,5 +1,5 @@
 
-import { cast, ValidationError } from "@deepkit/type";
+import { cast, ValidationError } from "@runtyped/type";
 import { validationErrorToString } from "./utils.js";
 import assert from "node:assert";
 

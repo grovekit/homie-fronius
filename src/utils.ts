@@ -1,5 +1,5 @@
 
-import { type ValidationErrorItem, type ValidationError } from "@deepkit/type";
+import { type ValidationErrorItem, type ValidationError } from "@runtyped/type";
 
 export const wait = (delay: number): Promise<void> => {
   return new Promise((resolve) => {

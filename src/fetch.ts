@@ -2,7 +2,7 @@
 import { errToString, validationErrorToString } from "./utils.js";
 import { DevicesPayload, PowerflowPayload } from "./fetch-types.js";
 import { resolve } from "node:path/posix";
-import { cast, ReceiveType, resolveReceiveType, ValidationError } from "@deepkit/type";
+import { cast, ReceiveType, resolveReceiveType, ValidationError } from "@runtyped/type";
 
 const froniusFetch = async <T>(url: URL, __type_T?: ReceiveType<T>): Promise<T> => {
   __type_T = resolveReceiveType(__type_T);

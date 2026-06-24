@@ -27,6 +27,12 @@ export class FroniusGateway extends RootDevice {
 
   constructor(fronius_id: string, prefix: string, opts: ClientOpts) {
 
+    fronius_id = fronius_id
+      .trim()
+      .replace(/^Fronius_/, '')
+      .toLowerCase()
+      .replace(/[^a-zA-Z0-9]+/g, '-');
+
     const info: DeviceInfo = {
       name: `Fronius ${fronius_id}`,
       version: 1,
