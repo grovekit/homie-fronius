@@ -27,18 +27,21 @@ export class FroniusGateway extends RootDevice {
 
   constructor(fronius_id: string, prefix: string, opts: ClientOpts) {
 
-    fronius_id = fronius_id
+    const device_id = fronius_id
       .trim()
-      .replace(/^Fronius_/, '')
       .toLowerCase()
       .replace(/[^a-zA-Z0-9]+/g, '-');
 
-    const info: DeviceInfo = {
-      name: `Fronius ${fronius_id}`,
+    const device_name = fronius_id
+      .trim()
+      .replace(/\_+/g, ' ');
+
+    const device_info: DeviceInfo = {
+      name: device_name,
       version: 1,
     };
 
-    super(`fronius-${fronius_id}`, info, opts, prefix);
+    super(device_id, device_info, opts, prefix);
 
     this.#accumulator = this.addNode('accumulator', {
       name: 'Accumulator',
