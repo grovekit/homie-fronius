@@ -4,6 +4,8 @@ import { validationErrorToString } from "./utils.js";
 import assert from "node:assert";
 
 export interface Env {
+  /** Homie ID */
+  HOMIE_ID?: string;
   /** URL of Homie MQTT broker */
   HOMIE_URL: string;
   /** Homie MQTT prefix */
@@ -29,6 +31,8 @@ export const getEnv = (): Env => {
 };
 
 export interface Config {
+  /** Homie ID */
+  homie_id?: string;
   /** URL of Homie MQTT broker */
   homie_url: URL;
   /** Homie MQTT prefix */
@@ -44,6 +48,7 @@ export interface Config {
 export const getConfigFromEnv = (): Config => {
   const env = getEnv();
   const config: Config = {
+    homie_id: env.HOMIE_ID,
     homie_url: new URL(env.HOMIE_URL),
     homie_prefix: env.HOMIE_PREFIX || 'homie',
     fronius_url: new URL(env.FRONIUS_URL),

@@ -22,20 +22,29 @@ logger.info('polling interval: %s seconds', config.polling_interval);
 logger.info('homie URL: %s', config.homie_url.toString());
 logger.info('fronius URL: %s', config.fronius_url.toString());
 
-let gateway: FroniusGateway | undefined = undefined;
+let device_id = config.homie_id;
 
-const devices = await fetchDevices(config.fronius_url);
-
-if (devices) {
-  for (const device of devices) {
-    if (device.id) {
-      gateway = new FroniusGateway(device.id, config.homie_prefix, opts);
-      await gateway.ready();
-      logger.info('found device with ID %s, gateway initialized', device.id);
-      break;
+if (!device_id) {
+  logger.info('HOMIE_ID not set, fetching device ID from Fronius API');
+  const devices = await fetchDevices(config.fronius_url);
+  if (devices) {
+    for (const device of devices) {
+      if (device.id) {
+        logger.info('found device with ID %s', device.id);
+        device_id = device.id;
+        break;
+      }
     }
   }
 }
+
+if (!device_id) {
+  logger.error('cannot initialize gateway: the Fronius API returned no device with a specified ID and the HOMIE_ID environment variable is not set');
+  process.exit(1);
+}
+
+const gateway = new FroniusGateway(device_id, config.homie_prefix, opts);
+await gateway.ready();
 
 if (!gateway) {
   logger.error('cannot initialize gateway: the Fronius API returned no device with a specified ID');
