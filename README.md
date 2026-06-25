@@ -26,7 +26,7 @@ Configuration is provided through environment variables.
 ```env
 HOMIE_URL=mqtt://localhost:1883
 HOMIE_PREFIX=homie
-FRONIUS_URL=http://192.168.1.42
+FRONIUS_URL=http://192.168.1.42/api
 LOG_LEVEL=info
 POLLING_INTERVAL=10
 ```
@@ -92,7 +92,7 @@ total, including both direct and indirect dependencies.
 | -------------------------- | -------------------------------------------- |
 | `@grovekit/homie-client`   | Homie MQTT client for publishing device data |
 | `@grovekit/homie-core`     | Shared Homie protocol types and utilities    |
-| `@deepkit/type`            | Runtime type casting and validation          |
+| `@runtyped/type`           | Runtime type casting and validation          |
 | `loopyloop`                | Resilient asynchronous polling loop          |
 | `pinetto`                  | Lightweight structured logger                |
 

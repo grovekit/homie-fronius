@@ -7,23 +7,22 @@
   "scripts": {
     "test": "node --test dist/**/*.test.js",
     "ts:clean": "rm -rf ./dist && rm -f ./tsconfig.tsbuildinfo",
-    "ts:build": "npm run ts:clean && tsc",
-    "ts:watch": "npm run ts:clean && tsc --watch",
-    "build": "npm run ts:build",
-    "postinstall": "npx runtyped-install-transformer"
+    "ts:build": "npx runtyped-install-transformer && npm run ts:clean && tsc",
+    "ts:watch": "npx runtyped-install-transformer && npm run ts:clean && tsc --watch",
+    "build": "npm run ts:build"
   },
   "author": "Jacopo Scazzosi <jacopo@scazzosi.com>",
   "license": "MIT",
   "homepage": "https://github.com/grovekit/homie-fronius",
   "devDependencies": {
-    "@runtyped/type-compiler": "^2.0.0-alpha.3",
+    "@runtyped/type-compiler": "^1.0.20",
     "@types/node": "^26.0.0",
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@grovekit/homie-client": "^0.0.1-alpha.11",
-    "@grovekit/homie-core": "^0.0.1-alpha.4",
-    "@runtyped/type": "^2.0.0-alpha.3",
+    "@grovekit/homie-client": "^0.1.0",
+    "@grovekit/homie-core": "^0.1.0",
+    "@runtyped/type": "^1.0.20",
     "loopyloop": "^4.0.2",
     "pinetto": "^4.0.0"
   }
